@@ -1,0 +1,33 @@
+{
+  "name": "coffee",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:dev": "nodemon ./bin/www"
+  },
+  "engines": {
+    "node": "v16.x"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.0",
+    "express": "~4.16.1",
+    "mongoose": "^6.3.1",
+    "morgan": "~1.9.1"
+  },
+  "description": "",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weiyi-li00/node-week3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weiyi-li00/node-week3/issues"
+  },
+  "homepage": "https://github.com/weiyi-li00/node-week3#readme"
+}
