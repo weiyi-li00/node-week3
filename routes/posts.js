@@ -3,13 +3,11 @@ var express = require("express");
 var router = express.Router();
 const Post = require("../models/postsModel");
 const handleError = require("../service/handleError");
+const handleSuccess = require("../service/handleSuccess");
 //資料全撈
 router.get("/", async (req, res) => {
-  //res.send("respond with a resource"); //回傳網頁格式
-  res.status(200).json({
-    status: "status",
-    post: await Post.find()
-  });
+  const post = await Post.find();
+  handleSuccess(res, post);
 });
 //新增單筆
 router.post("/", async (req, res) => {
@@ -17,15 +15,9 @@ router.post("/", async (req, res) => {
     const { body } = req;
     const newpost = await Post.create(body);
     if (body.content) {
-      res.status(200).json({
-        status: "status",
-        post: newpost
-      });
+      handleSuccess(res, newpost);
     } else if (body.name) {
-      res.status(200).json({
-        status: "status",
-        post: newpost
-      });
+      handleSuccess(res, newpost);
     } else {
       handleError(res);
     }
@@ -43,10 +35,8 @@ router.patch("/:id", async (req, res) => {
     if (body.content) {
       const editPost = await Post.findByIdAndUpdate(id, body);
       if (editPost) {
-        res.status(200).json({
-          status: "success",
-          data: await Post.findById(editPost._id)
-        });
+        const editda = await Post.findById(editPost._id);
+        handleSuccess(res, editda);
       } else {
         handleError(res);
       }
@@ -62,10 +52,8 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const delPost = await Post.findByIdAndDelete(id);
   if (delPost) {
-    res.status(200).json({
-      status: "success",
-      data: await Post.find()
-    });
+    const delda = await Post.find();
+    handleSuccess(res, delda);
   } else {
     handleError(res);
   }
