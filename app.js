@@ -3,11 +3,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./confing.env" });
-const mongoose = require("mongoose");
-const DB = process.env.DATABASE.replace("<password>", process.env.DB_PASSWORD);
-mongoose.connect(DB).then(() => console.log("資料庫連接成功"));
+require("./connections");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
