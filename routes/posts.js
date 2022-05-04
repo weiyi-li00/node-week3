@@ -4,27 +4,11 @@ var router = express.Router();
 const Post = require("../models/postsModel");
 const handleError = require("../service/handleError");
 const handleSuccess = require("../service/handleSuccess");
+const PostsControllers = require("../controllers/posts");
 //資料全撈
-router.get("/", async (req, res) => {
-  const post = await Post.find();
-  handleSuccess(res, post);
-});
+router.get("/", PostsControllers.getPosts);
 //新增單筆
-router.post("/", async (req, res) => {
-  try {
-    const { body } = req;
-    const newpost = await Post.create(body);
-    if (body.content) {
-      handleSuccess(res, newpost);
-    } else if (body.name) {
-      handleSuccess(res, newpost);
-    } else {
-      handleError(res);
-    }
-  } catch (err) {
-    handleError(res, err);
-  }
-});
+router.post("/", PostsControllers.createPosts);
 //編輯單筆
 router.patch("/:id", async (req, res) => {
   const { body } = req;
