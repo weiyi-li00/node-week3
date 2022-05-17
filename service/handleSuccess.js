@@ -1,6 +1,6 @@
-function handleSuccess (res, data) { 
+function handleSuccess(res, data) {
   res.status(200).json({
-    status: "status",
+    status: "ture",
     post: data
   });
 }
