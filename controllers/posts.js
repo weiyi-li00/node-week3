@@ -7,19 +7,15 @@ const posts = {
     const post = await Post.find();
     handleSuccess(res, post);
   },
-  async createPosts(req, res) {
-    try {
-      const { body } = req;
+  async createPosts(req, res, next) {
+    const { body } = req;
+    if (body.content === "" || body.content === undefined) {
+      handleError(500, "請檢查content資料", next);
+    } else if (body.name === "" || body.name === undefined) {
+      handleError(500, "請檢查name資料", next);
+    } else {
       const newpost = await Post.create(body);
-      if (body.content) {
-        handleSuccess(res, newpost);
-      } else if (body.name) {
-        handleSuccess(res, newpost);
-      } else {
-        handleError(res);
-      }
-    } catch (err) {
-      handleError(res, err);
+      handleSuccess(res, newpost);
     }
   },
   async patchPosts(req, res) {
